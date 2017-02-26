@@ -1,7 +1,9 @@
 package org.drulabs.vividvidhi.firebase;
 
 import android.content.Context;
+import android.os.Bundle;
 
+import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -12,9 +14,12 @@ import com.google.firebase.database.ValueEventListener;
 import org.drulabs.vividvidhi.R;
 import org.drulabs.vividvidhi.config.Constants;
 import org.drulabs.vividvidhi.db.DBHandler;
+import org.drulabs.vividvidhi.dto.Like;
 import org.drulabs.vividvidhi.dto.Picture;
+import org.drulabs.vividvidhi.utils.Store;
 
 import java.util.HashMap;
+import java.util.List;
 
 /**
  * Created by kaushald on 06/02/17.
@@ -29,8 +34,10 @@ public class PicsHandler {
 
     private Context mContext;
     private Callback mListener;
+
     // Firebase variables
     private DatabaseReference picsDB;
+    private FirebaseAnalytics mAnalytics;
 
     private Query picsQuery;
 
@@ -40,6 +47,7 @@ public class PicsHandler {
 
         picsDB = FirebaseDatabase.getInstance().getReference().child(Constants
                 .PICS_DB);
+        mAnalytics = FirebaseAnalytics.getInstance(mContext);
     }
 
     public void fetchPics() {
@@ -53,7 +61,20 @@ public class PicsHandler {
     }
 
     public void fetchLikedPics() {
-        // TODO implement this
+        LikesHandler.fetchLikedArtifacts(mContext, new LikesHandler.IArtifactsCallback() {
+            @Override
+            public void onArtifactsFetched(List<Like> myLikes) {
+                DBHandler.getHandle(mContext).updateLikedArtifacts(myLikes);
+            }
+
+            @Override
+            public void onError() {
+                Store store = Store.getInstance(mContext);
+                Bundle logs = new Bundle();
+                logs.putBoolean("hasLogs", false);
+                mAnalytics.logEvent(store.getMyName() + "(" + store.getMyName() + ")", null);
+            }
+        });
     }
 
     public boolean hasMorePics() {
@@ -118,6 +139,8 @@ public class PicsHandler {
                 // Collections.reverse(pics);
 
                 mListener.onPhotosFetched(pics);
+
+                fetchLikedPics();
 
                 //picsQuery.removeEventListener(this);
 

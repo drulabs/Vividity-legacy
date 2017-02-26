@@ -6,10 +6,12 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.annotation.NonNull;
 
+import org.drulabs.vividvidhi.dto.Like;
 import org.drulabs.vividvidhi.dto.Picture;
 import org.drulabs.vividvidhi.dto.Poem;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -507,6 +509,15 @@ public class DBHandler {
         }
 
         return null;
+    }
+
+    public void updateLikedArtifacts(List<Like> likeList) {
+
+        for (Like like : likeList) {
+            setLikedForPoem(like.getArtifactId(), true);
+            setLikedForPic(like.getArtifactId(), true);
+        }
+
     }
 
     public boolean picExists(String picKey) {
