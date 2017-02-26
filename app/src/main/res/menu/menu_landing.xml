@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/only_picture"
+        android:title="@string/text_picture"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/only_poems"
+        android:title="@string/text_poems"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/only_videos"
+        android:title="@string/text_videos"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/only_audio"
+        android:title="@string/text_audio"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/bug_report_menu"
+        android:title="@string/text_bug_report"
+        app:showAsAction="never"/>
+
+</menu>

@@ -1,0 +1,81 @@
+<resources>
+    <string name="app_name">Vivid Vidhi</string>
+
+    <!-- Strings related to login -->
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in">Sign in</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="error_invalid_username">User not found</string>
+    <string name="error_invalid_password">Invalid password for specified user</string>
+    <string name="error_incorrect_password">This password is incorrect</string>
+    <string name="error_field_required">This field is required</string>
+    <string name="permission_rationale">"Contacts permissions are needed for providing email
+        completions."
+    </string>
+    <string name="txt_username">Username</string>
+    <string name="txt_request_access"><u>Request access</u></string>
+    <string name="invalid_credentials_msg">Invalid username or password</string>
+    <string name="request_timedout_msg">Request took longer than expected. Retry.</string>
+    <string name="txt_login_successful">Login successful</string>
+    <string name="txt_name">Name</string>
+    <string name="txt_password">Password</string>
+    <string name="txt_relationship">Relationship with Vidhi</string>
+    <string name="username_check_failed">Username must contain at least 6 alphanumeric
+        characters</string>
+    <string name="password_check_failed">Password must contain at least 6 digits</string>
+    <string name="user_already_requested_msg">This user has already requested access</string>
+    <string name="user_registration_request_successful">Registration request sent successfully</string>
+    <string name="field_cannot_be_empty">This field cannot be left empty</string>
+    <string name="add_profile_pic">Add profile pic</string>
+    <string name="pick_from_galery">Pick from gallery</string>
+    <string name="camera_capture">Use camera</string>
+    <string name="pick_from_galery_title">Select picture</string>
+    <string name="name_check_failed">Name must be alphabetic and at least 5 characters in
+        length</string>
+    <string name="already_registered_msg">You are already a registered user. Login with your credentials.</string>
+    <string name="something_went_wrong">Something went wrong. Please try again later</string>
+    <string name="required_permission_denied">This permission is required for app to function</string>
+    <string name="empty_username_msg">Please enter username before adding profile pic</string>
+    <string name="no_camera_found">No camera support found</string>
+    <string name="no_profile_pic">Please add a profile pic to continue</string>
+    <string name="loading_please_wait">Please wait...</string>
+    <string name="hash_msg">#Cuteness</string>
+    <string name="start_typing_here">Start typing...</string>
+    <string name="very_long_text">so cute and so so so pretty, just like an angel from the heavens above. Up above the world so high like a diamond in the sky. Twinkle twinkle little star how I wonder what you are?</string>
+    <string name="very_standard_text">She is so cute and perfect. I feel like hugging her all the time.</string>
+    <string name="no_comments_found">No comments found...</string>
+    <string name="text_share_now">share</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="add_pic_name">Name of the picture</string>
+    <string name="add_pic_timestamp">When was this taken ?</string>
+    <string name="add_pic_relationship">Relationship with Vidhi ?</string>
+    <string name="add_pic_photographer">Who took this picture ?</string>
+    <string name="add_pic_comment">Comments...</string>
+    <string name="fill_all_columns">Please fill all the fields</string>
+    <string name="pic_already_exists">This pic already exists</string>
+    <string name="save_picture">Save</string>
+    <string name="image_upload_successful">Image has be uploaded successfully</string>
+    <string name="error_uploading_pic">Error occured while uploading the picture. Try again later...</string>
+    <string name="invalid_args_msg">Invalid arguments pased</string>
+    <string name="error_try_again">An error has occured. Please try again later</string>
+    <string name="comment_saved_successfully">Comment saved successfully</string>
+    <string name="text_picture">Pictures</string>
+    <string name="text_poems">Poems</string>
+    <string name="text_videos">Videos</string>
+    <string name="text_audio">Audio</string>
+    <string name="text_add_stuff">Add stuff</string>
+    <string name="feature_coming_soon">Coming soon... This feature is not yet supported</string>
+    <string name="comment_added_successfully">Comment added successfully</string>
+    <string name="text_download">Download</string>
+    <string name="text_bug_report">Report a bug</string>
+    <string name="tap_to_open">Tap to open file</string>
+    <string name="text_downloading">Downloading...</string>
+    <string name="unable_to_share">Unable to share downloaded file</string>
+    <string name="shared_via_vivi">Shared via Vivid Vidhi app for andriod</string>
+    <string name="commented_on_suffix">commented on</string>
+    <string name="created_on_text">Created on</string>
+    <string name="no_more_poems_available">No more poems are available at this moment.</string>
+</resources>

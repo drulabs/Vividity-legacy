@@ -1,0 +1,56 @@
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+
+    <!--Border related-->
+    <dimen name="border_very_thin">1dp</dimen>
+    <dimen name="border_thin">2dp</dimen>
+    <dimen name="border_regular">3dp</dimen>
+    <dimen name="border_fat">4dp</dimen>
+    <dimen name="border_very_fat">5dp</dimen>
+
+    <!--Margin related-->
+    <dimen name="margin_very_small">4dp</dimen>
+    <dimen name="margin_small">8dp</dimen>
+    <dimen name="margin_medium">12dp</dimen>
+    <dimen name="margin_regular">16dp</dimen>
+    <dimen name="margin_large">24dp</dimen>
+    <dimen name="margin_x_large">36dp</dimen>
+    <dimen name="margin_xx_large">64dp</dimen>
+
+    <!--Text related-->
+    <dimen name="txt_very_small">10sp</dimen>
+    <dimen name="txt_small">12sp</dimen>
+    <dimen name="txt_medium">18sp</dimen>
+    <dimen name="txt_big">24sp</dimen>
+
+    <!--Radius related-->
+    <dimen name="radius_negligible">1dp</dimen>
+    <dimen name="radius_very_small">3dp</dimen>
+    <dimen name="radius_small">6dp</dimen>
+    <dimen name="radius_medium">12dp</dimen>
+    <dimen name="radius_regular">16dp</dimen>
+
+    <!-- Box related -->
+    <dimen name="box_very_small">30dp</dimen>
+    <dimen name="box_small">40dp</dimen>
+    <dimen name="box_medium">50dp</dimen>
+    <dimen name="box_regular">60dp</dimen>
+    <dimen name="box_large">80dp</dimen>
+    <dimen name="box_x_large">100dp</dimen>
+
+    <!--Elevation related-->
+    <dimen name="elevation_tiny">4dp</dimen>
+    <dimen name="elevation_small">6dp</dimen>
+    <dimen name="elevation_regular">8dp</dimen>
+    <dimen name="elevation_medium">12dp</dimen>
+    <dimen name="elevation_large">16dp</dimen>
+
+    <!--padding related-->
+    <dimen name="padding_tiny">2dp</dimen>
+    <dimen name="padding_small">4dp</dimen>
+    <dimen name="padding_regular">6dp</dimen>
+
+    <dimen name="bottom_button_width">4dp</dimen>
+</resources>

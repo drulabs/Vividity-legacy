@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:id="@+id/activity_add_picture"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@color/lighterGray"
+              android:orientation="vertical"
+              android:paddingBottom="@dimen/activity_vertical_margin"
+              android:paddingLeft="@dimen/activity_horizontal_margin"
+              android:paddingRight="@dimen/activity_horizontal_margin"
+              android:paddingTop="@dimen/activity_vertical_margin"
+              android:weightSum="16"
+              tools:context="org.drulabs.vividvidhi.add.AddPicture">
+
+    <!--<LinearLayout-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:orientation="vertical"-->
+    <!--android:weightSum="16">-->
+
+    <ImageView
+        android:id="@+id/img_add_pic"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginBottom="@dimen/margin_small"
+        android:layout_weight="8"
+        android:adjustViewBounds="true"
+        android:src="@mipmap/ic_camera_plus"
+        tools:src="@drawable/sample_vivi"/>
+
+    <org.drulabs.vividvidhi.ui.DruEditText
+        android:id="@+id/add_pic_timestamp"
+        style="@style/text_input_regular"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="2"
+        android:hint="@string/add_pic_timestamp"
+        android:maxLines="1"/>
+
+    <org.drulabs.vividvidhi.ui.DruEditText
+        android:id="@+id/add_pic_photographer"
+        style="@style/text_input_regular"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="2"
+        android:hint="@string/add_pic_photographer"
+        android:maxLines="1"/>
+
+    <org.drulabs.vividvidhi.ui.DruEditText
+        android:id="@+id/add_pic_relationship"
+        style="@style/text_input_regular"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="2"
+        android:hint="@string/add_pic_relationship"
+        android:maxLines="1"/>
+
+    <org.drulabs.vividvidhi.ui.DruEditText
+        android:id="@+id/add_pic_comment"
+        style="@style/text_input_regular"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="2"
+        android:hint="@string/add_pic_comment"
+        android:maxLines="1"/>
+
+    <!--</LinearLayout>-->
+
+</LinearLayout>

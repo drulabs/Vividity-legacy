@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             xmlns:app="http://schemas.android.com/apk/res-auto"
+             xmlns:tools="http://schemas.android.com/tools"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+             android:background="@color/lightGray"
+             android:paddingBottom="@dimen/activity_vertical_margin"
+             android:paddingLeft="@dimen/activity_horizontal_margin"
+             android:paddingRight="@dimen/activity_horizontal_margin"
+             android:paddingTop="@dimen/activity_vertical_margin"
+             tools:context="org.drulabs.vividvidhi.landing.LandingPage">
+
+    <RelativeLayout
+        android:id="@+id/comment_layout_base"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="visible">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@+id/txt_comment"
+            android:visibility="visible">
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/comment_list"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="visible"
+                tools:listitem="@layout/comment_item">
+
+            </android.support.v7.widget.RecyclerView>
+
+            <org.drulabs.vividvidhi.ui.DruTextView
+                style="@style/comment_text_input"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="@string/no_comments_found"
+                android:visibility="gone"/>
+
+        </FrameLayout>
+
+        <org.drulabs.vividvidhi.ui.DruEditText
+            android:id="@+id/txt_comment"
+            style="@style/text_input_regular"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="@dimen/margin_small"
+            android:layout_marginTop="@dimen/margin_small"
+            android:layout_toLeftOf="@+id/fab_send"
+            android:gravity="end"
+            android:hint="@string/start_typing_here"
+            android:maxLength="150"
+            android:maxLines="2"
+            android:textAlignment="textEnd"/>
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fab_send"
+            style="@style/comment_text_input"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_margin="@dimen/margin_small"
+            android:scaleType="fitXY"
+            android:src="@mipmap/ic_send"
+            app:backgroundTint="@color/light_green"
+            app:elevation="4dp"
+            app:fabSize="normal"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/comment_layout_loader"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone">
+
+        <ProgressBar
+            android:id="@+id/comment_progress_bar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"/>
+
+        <org.drulabs.vividvidhi.ui.DruTextView
+            style="@style/comment_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/comment_progress_bar"
+            android:layout_centerHorizontal="true"
+            android:text="@string/loading_please_wait"/>
+
+    </RelativeLayout>
+</FrameLayout>

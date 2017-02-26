@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:id="@+id/decoration_holder"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:layout_below="@+id/item_image"
+              android:orientation="horizontal"
+              android:weightSum="6">
+
+    <FrameLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="2">
+
+        <org.drulabs.vividvidhi.ui.DruTextView
+            android:id="@+id/txt_like_count"
+            style="@style/item_decoration_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@drawable/accent_background"
+            android:drawableLeft="@mipmap/ic_unlike"
+            android:drawableStart="@mipmap/ic_unlike"
+            android:gravity="center"
+            android:padding="@dimen/padding_regular"
+            tools:text="74"/>
+    </FrameLayout>
+
+    <FrameLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="2">
+
+        <org.drulabs.vividvidhi.ui.DruTextView
+            android:id="@+id/txt_comment_count"
+            style="@style/item_decoration_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@drawable/accent_background"
+            android:drawableLeft="@mipmap/ic_comments"
+            android:drawableStart="@mipmap/ic_comments"
+            android:gravity="center"
+            android:padding="@dimen/padding_regular"
+            tools:text="74"/>
+    </FrameLayout>
+
+    <FrameLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1">
+
+        <org.drulabs.vividvidhi.ui.DruTextView
+            android:id="@+id/txt_share_btn"
+            style="@style/item_decoration_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:background="@drawable/accent_background"
+            android:drawableLeft="@mipmap/ic_share"
+            android:drawableStart="@mipmap/ic_share"
+            android:gravity="center"
+            android:padding="@dimen/padding_regular"/>
+    </FrameLayout>
+
+    <FrameLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1">
+
+        <org.drulabs.vividvidhi.ui.DruTextView
+            android:id="@+id/txt_download_btn"
+            style="@style/item_decoration_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:background="@drawable/accent_background"
+            android:drawableLeft="@mipmap/ic_download"
+            android:drawableStart="@mipmap/ic_download"
+            android:gravity="center"
+            android:padding="@dimen/padding_regular"/>
+    </FrameLayout>
+</LinearLayout>

@@ -1,0 +1,101 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:id="@+id/login_view_holder"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@color/lighterGray"
+              android:gravity="center_horizontal"
+              android:orientation="vertical"
+              android:paddingBottom="@dimen/activity_vertical_margin"
+              android:paddingLeft="@dimen/activity_horizontal_margin"
+              android:paddingRight="@dimen/activity_horizontal_margin"
+              android:paddingTop="@dimen/activity_vertical_margin"
+              tools:context="org.drulabs.vividvidhi.login.LoginActivity">
+
+    <!-- Login progress -->
+    <ProgressBar
+        android:id="@+id/login_progress"
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:visibility="gone"/>
+
+    <!--    <ScrollView
+            android:id="@+id/login_form"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">-->
+
+    <LinearLayout
+        android:id="@+id/email_login_form"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:weightSum="10">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/login_image"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginBottom="@dimen/margin_regular"
+            android:layout_weight="4"
+            android:src="@drawable/ic_face_black_800dp"
+            app:civ_border_color="@color/colorPrimaryDark"
+            app:civ_border_width="@dimen/border_thin"/>
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="2">
+
+            <org.drulabs.vividvidhi.ui.DruTextInputEditText
+                android:id="@+id/email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/txt_username"
+                android:inputType="text"
+                android:maxLines="1"/>
+
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="2">
+
+            <org.drulabs.vividvidhi.ui.DruTextInputEditText
+                android:id="@+id/password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/prompt_password"
+                android:inputType="numberPassword"
+                android:maxLines="1"/>
+
+        </android.support.design.widget.TextInputLayout>
+
+        <org.drulabs.vividvidhi.ui.DruButton
+            android:id="@+id/email_sign_in_button"
+            style="@style/ButtonBigBlue"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="@dimen/margin_medium"
+            android:layout_weight="1"
+            android:text="@string/action_sign_in"
+            android:textStyle="bold"/>
+
+        <org.drulabs.vividvidhi.ui.DruTextView
+            android:id="@+id/request_access"
+            style="@style/request_access_style"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginEnd="@dimen/margin_regular"
+            android:layout_marginRight="@dimen/margin_regular"
+            android:layout_marginTop="@dimen/margin_regular"
+            android:layout_weight="1"
+            android:gravity="end|right|center_vertical"
+            android:text="@string/txt_request_access"/>
+
+    </LinearLayout>
+    <!--</ScrollView>-->
+</LinearLayout>

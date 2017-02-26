@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             xmlns:app="http://schemas.android.com/apk/res-auto"
+             xmlns:tools="http://schemas.android.com/tools"
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content">
+
+    <android.support.v7.widget.CardView
+        style="@style/comment_item_style"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_very_small"
+        android:background="@android:drawable/dialog_holo_light_frame"
+        app:cardBackgroundColor="@color/lighterGray"
+        app:cardCornerRadius="@dimen/radius_very_small">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/img_liker"
+                android:layout_width="@dimen/box_large"
+                android:layout_height="@dimen/box_large"
+                android:layout_gravity="center_vertical"
+                android:layout_margin="@dimen/margin_small"
+                android:src="@mipmap/ic_launcher"
+                tools:src="@mipmap/ic_launcher"/>
+
+            <LinearLayout
+                android:id="@+id/like_holder"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="@dimen/margin_medium"
+                android:orientation="vertical">
+
+                <org.drulabs.vividvidhi.ui.DruTextView
+                    android:id="@+id/liked_by"
+                    style="@style/like_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_marginLeft="@dimen/margin_medium"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    tools:text="Kaushal commented on"/>
+
+                <org.drulabs.vividvidhi.ui.DruTextView
+                    android:id="@+id/liked_on"
+                    style="@style/like_timestamp"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_marginLeft="@dimen/margin_medium"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    tools:text="Dec-08-2016, 12:23:43"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </android.support.v7.widget.CardView>
+</FrameLayout>
