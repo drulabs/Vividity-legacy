@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "560496245142",
+    "firebase_url": "https://vivid-vidhi.firebaseio.com",
+    "project_id": "vivid-vidhi",
+    "storage_bucket": "vivid-vidhi.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:560496245142:android:ff067eb8d1882af1",
+        "android_client_info": {
+          "package_name": "org.drulabs.vividvidhi"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "560496245142-q7snh4jp9ocqfd6398unn7ddtabrcj42.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "org.drulabs.vividvidhi",
+            "certificate_hash": "EC44361AF5CA72A5B39099F8D1E58111F49F59E6"
+          }
+        },
+        {
+          "client_id": "560496245142-j6rabe001bm25r159m1ifft22iuc34lo.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC5i3UOtd5RljTxNSCb4tLzbUsTX1WUCK4"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "560496245142-j6rabe001bm25r159m1ifft22iuc34lo.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
