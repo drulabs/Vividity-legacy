@@ -42,7 +42,9 @@ public class CommentsPresenter implements CommentContract.Presenter, CommentsHan
     @Override
     public void addComment(Comment comment) {
         commentsHandler.addComment(comment);
-        view.showLoading();
+        if (view != null) {
+            view.showLoading();
+        }
     }
 
     @Override
@@ -52,31 +54,41 @@ public class CommentsPresenter implements CommentContract.Presenter, CommentsHan
 
     @Override
     public void destroy() {
-        this.view = null;
-        this.commentsHandler = null;
+        if (view != null) {
+            this.view = null;
+            this.commentsHandler = null;
+        }
     }
 
     @Override
     public void onCommentAddedSuccessfully() {
         NotificationToast.showToast(activity, activity.getString(R.string
                 .comment_added_successfully));
-        view.hideLoading();
-        view.onCommentSaved();
+        if (view != null) {
+            view.hideLoading();
+            view.onCommentSaved();
+        }
     }
 
     @Override
     public void onCommentsFetched(List<Comment> comments) {
-        view.loadComments(comments);
+        if (view != null) {
+            view.loadComments(comments);
+        }
     }
 
     @Override
     public void onCommentFetched(Comment comment) {
-        view.loadComment(comment);
+        if (view != null) {
+            view.loadComment(comment);
+        }
     }
 
     @Override
     public void onError() {
-        view.onLoadError(activity.getString(R.string.something_went_wrong));
-        view.hideLoading();
+        if (view != null) {
+            view.onLoadError(activity.getString(R.string.something_went_wrong));
+            view.hideLoading();
+        }
     }
 }

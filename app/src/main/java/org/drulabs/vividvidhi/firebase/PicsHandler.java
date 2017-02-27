@@ -72,7 +72,7 @@ public class PicsHandler {
                 Store store = Store.getInstance(mContext);
                 Bundle logs = new Bundle();
                 logs.putBoolean("hasLogs", false);
-                mAnalytics.logEvent(store.getMyName() + "(" + store.getMyName() + ")", null);
+                mAnalytics.logEvent(store.getMyName() + "(" + store.getMyKey() + ")", null);
             }
         });
     }
@@ -140,6 +140,7 @@ public class PicsHandler {
 
                 mListener.onPhotosFetched(pics);
 
+                // Fetch all the pics liked by user (metadata only)
                 fetchLikedPics();
 
                 //picsQuery.removeEventListener(this);

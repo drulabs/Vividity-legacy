@@ -60,21 +60,30 @@
 
         </FrameLayout>
 
-        <org.drulabs.vividvidhi.ui.DruTextView
-            android:id="@+id/txt_the_poem"
-            style="@style/text_poem"
+        <FrameLayout
+            android:id="@+id/poem_text_holder"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/image_item_holder"
             android:layout_marginBottom="@dimen/margin_regular"
             android:layout_marginTop="@dimen/margin_regular"
-            tools:text="@string/very_long_text"/>
+            android:background="@drawable/image_gradient_overlay">
+
+            <org.drulabs.vividvidhi.ui.DruTextView
+                android:id="@+id/txt_the_poem"
+                style="@style/text_poem"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_marginBottom="@dimen/margin_very_small"
+                android:layout_below="@+id/image_item_holder"
+                tools:text="@string/very_long_text"/>
+        </FrameLayout>
 
         <include
             layout="@layout/likes_comments_no_download"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/txt_the_poem"/>
+            android:layout_below="@+id/poem_text_holder"/>
 
     </RelativeLayout>
 </android.support.v7.widget.CardView>

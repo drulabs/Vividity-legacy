@@ -89,7 +89,9 @@ public class CommentsActivity extends AppCompatActivity implements CommentContra
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        mPresenter.destroy();
+        if (mPresenter != null) {
+            mPresenter.destroy();
+        }
     }
 
     @Override

@@ -73,7 +73,7 @@ public class PoemsHandler {
                 Store store = Store.getInstance(mContext);
                 Bundle logs = new Bundle();
                 logs.putBoolean("hasLogs", false);
-                mAnalytics.logEvent(store.getMyName() + "(" + store.getMyName() + ")", null);
+                mAnalytics.logEvent(store.getMyName() + "(" + store.getMyKey() + ")", null);
             }
         });
     }
@@ -101,6 +101,8 @@ public class PoemsHandler {
 
                 callback.onPoemsFetched(poemMap);
                 DBHandler.getHandle(mContext).addPoem(poemMap);
+
+                // Now fetch all the poems liked by current user
                 fetchLikedPoems();
 
 

@@ -116,6 +116,8 @@ public class PoemsAdapter extends RecyclerView.Adapter<PoemsAdapter.PoemsVH> {
             final Poem poem = poems.get(position);
             final String poemKey = getKeyForPoem(poem);
 
+            isLiked = dbHandler.isPoemLiked(poemKey);
+
             likes.setText(String.valueOf(poem.getLikesCount()));
             likes.setCompoundDrawablesWithIntrinsicBounds(isLiked ? R.mipmap.ic_like : R.mipmap
                     .ic_unlike, 0, 0, 0);
@@ -125,6 +127,25 @@ public class PoemsAdapter extends RecyclerView.Adapter<PoemsAdapter.PoemsVH> {
             tvTitle.setText(poem.getName());
 
             tvPoem.setText(Utility.getSpannedFromHtml(poem.getText()));
+
+            tvPoem.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                    boolean isPoemExpanded = tvPoem.getLayoutParams().height == ViewGroup
+                            .LayoutParams.WRAP_CONTENT;
+                    if (!isPoemExpanded) {
+                        ViewGroup.LayoutParams tvPoemLayoutParams = tvPoem.getLayoutParams();
+                        tvPoemLayoutParams.height = ViewGroup.LayoutParams.WRAP_CONTENT;
+                        tvPoem.setLayoutParams(tvPoemLayoutParams);
+                    } else {
+                        ViewGroup.LayoutParams tvPoemLayoutParams = tvPoem.getLayoutParams();
+                        tvPoemLayoutParams.height = 300;
+                        tvPoem.setLayoutParams(tvPoemLayoutParams);
+                    }
+
+                }
+            });
 
 
             // Load Image

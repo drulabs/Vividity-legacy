@@ -93,13 +93,17 @@ public class PoemsPresenter implements PoemContract.Presenter, PoemsHandler.Call
 
     @Override
     public void onPoemsFetched(Map<String, Poem> poemMap) {
-        view.hideLoading();
-        view.loadPoems(poemMap);
+        if (view != null) {
+            view.hideLoading();
+            view.loadPoems(poemMap);
+        }
     }
 
     @Override
     public void onError(String message) {
-        view.hideLoading();
-        view.onError(message);
+        if (view != null) {
+            view.hideLoading();
+            view.onError(message);
+        }
     }
 }

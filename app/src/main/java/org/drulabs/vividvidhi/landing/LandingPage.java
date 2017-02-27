@@ -5,6 +5,7 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.PersistableBundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -47,18 +48,19 @@ public class LandingPage extends AppCompatActivity implements SwipeRefreshLayout
 
         this.savedInstanceState = savedInstanceState;
 
-        if (savedInstanceState == null) {
-            swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.pics_swipe_layout);
-            swipeRefreshLayout.setOnRefreshListener(this);
+        swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.pics_swipe_layout);
+        swipeRefreshLayout.setOnRefreshListener(this);
 
-            picsFragment = PicsFragment.newInstance("Pics", "none");
-            picsFragment.setRetainInstance(true);
+        picsFragment = PicsFragment.newInstance("Pics", "none");
+        picsFragment.setRetainInstance(true);
 
-            currentlyVisibleFragment = PICS_FRAGMENT;
-            loadFragment(this.savedInstanceState, picsFragment, false);
+        poemsFragment = PoemsFragment.newInstance("Daddy Ji", "Vidhi", true);
+        poemsFragment.setRetainInstance(true);
 
-            isAdmin = Store.getInstance(this).isAdmin();
-        }
+        isAdmin = Store.getInstance(this).isAdmin();
+
+        currentlyVisibleFragment = PICS_FRAGMENT;
+        loadFragment(this.savedInstanceState, picsFragment);
 
     }
 
@@ -70,31 +72,46 @@ public class LandingPage extends AppCompatActivity implements SwipeRefreshLayout
 //        }
     }
 
-    private void loadFragment(Bundle savedInstanceState, Fragment fragment, boolean
-            addToBackStack) {
-        // Check that the activity is using the layout version with
-        // the fragment_container FrameLayout
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+
+        if (savedInstanceState == null) {
+            currentlyVisibleFragment = PICS_FRAGMENT;
+            loadFragment(this.savedInstanceState, picsFragment);
+        } else {
+            currentlyVisibleFragment = savedInstanceState.getInt("selectedFragment");
+            switch (currentlyVisibleFragment) {
+                case PICS_FRAGMENT:
+                    loadFragment(this.savedInstanceState, picsFragment);
+                    break;
+                case POEMS_FRAGMENT:
+                    loadFragment(this.savedInstanceState, poemsFragment);
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
+
+    private void loadFragment(Bundle savedInstanceState, Fragment fragment) {
         if (findViewById(R.id.fragment_holder) != null) {
 
             // However, if we're being restored from a previous state,
             // then we don't need to do anything and should return or else
             // we could end up with overlapping fragments.
-            //if (savedInstanceState != null) {
-            //    return;
-            //}
+//            if (savedInstanceState != null) {
+//                return;
+//            }
 
             // In case this activity was started with special instructions from an
             // Intent, pass the Intent's extras to the fragment as arguments
-            fragment.setArguments(getIntent().getExtras());
+            // fragment.setArguments(getIntent().getExtras());
 
-            // Add the fragment to the 'fragment_container' FrameLayout
-            if (addToBackStack) {
-                getSupportFragmentManager().beginTransaction()
-                        .add(R.id.fragment_holder, fragment).addToBackStack(null).commit();
-            } else {
-                getSupportFragmentManager().beginTransaction()
-                        .add(R.id.fragment_holder, fragment).commit();
-            }
+            // replace the 'fragment_container' FrameLayout with the fragment
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.fragment_holder, fragment).commit();
+
         }
     }
 
@@ -113,6 +130,12 @@ public class LandingPage extends AppCompatActivity implements SwipeRefreshLayout
             inflater.inflate(R.menu.menu_landing_admin, menu);
         }
         return true;
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState, PersistableBundle outPersistentState) {
+        outState.putInt("selectedFragment", currentlyVisibleFragment);
+        super.onSaveInstanceState(outState, outPersistentState);
     }
 
     @Override
@@ -137,7 +160,7 @@ public class LandingPage extends AppCompatActivity implements SwipeRefreshLayout
                 }
 
                 currentlyVisibleFragment = PICS_FRAGMENT;
-                loadFragment(this.savedInstanceState, picsFragment, false);
+                loadFragment(this.savedInstanceState, picsFragment);
                 return true;
             case R.id.only_poems:
 
@@ -154,7 +177,7 @@ public class LandingPage extends AppCompatActivity implements SwipeRefreshLayout
                 }
 
                 currentlyVisibleFragment = POEMS_FRAGMENT;
-                loadFragment(savedInstanceState, poemsFragment, true);
+                loadFragment(savedInstanceState, poemsFragment);
                 return true;
             case R.id.bug_report_menu:
 
@@ -211,6 +234,17 @@ public class LandingPage extends AppCompatActivity implements SwipeRefreshLayout
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
+
+        if (currentlyVisibleFragment != PICS_FRAGMENT) {
+            if (picsFragment == null) {
+                picsFragment = PicsFragment.newInstance("Pics", "none");
+                picsFragment.setRetainInstance(true);
+            }
+
+            currentlyVisibleFragment = PICS_FRAGMENT;
+            loadFragment(this.savedInstanceState, picsFragment);
+        } else {
+            super.onBackPressed();
+        }
     }
 }
