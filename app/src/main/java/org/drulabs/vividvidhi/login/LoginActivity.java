@@ -1,5 +1,6 @@
 package org.drulabs.vividvidhi.login;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
@@ -11,6 +12,7 @@ import android.widget.ImageView;
 
 import org.drulabs.vividvidhi.PresenterCreator;
 import org.drulabs.vividvidhi.R;
+import org.drulabs.vividvidhi.signin.SignInActivity;
 import org.drulabs.vividvidhi.ui.NotificationToast;
 import org.drulabs.vividvidhi.utils.Store;
 
@@ -33,13 +35,25 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        if (Store.getInstance(this).getUserEmail() == null) {
+            Intent signInIntent = new Intent(this, SignInActivity.class);
+            startActivity(signInIntent);
+            finish();
+            return;
+        }
+
         initializeUIElements();
 
         PresenterCreator.createLoginPresenter(this, this);
 
         // User has already signed in
-        if (Store.getInstance(this).getMyName() != null) {
-            presenter.navigateToHome();
+        if (Store.getInstance(this).getMyName() != null && Store.getInstance(this).getPassword()
+                != null) {
+
+            String savedUsername = Store.getInstance(this).getUsername();
+            String savedPassword = Store.getInstance(this).getPassword();
+
+            presenter.handleLogin(savedUsername, savedPassword);
             return;
         }
 

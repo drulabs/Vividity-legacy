@@ -5,7 +5,6 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.PersistableBundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -22,8 +21,12 @@ import org.drulabs.vividvidhi.utils.Utility;
 
 public class LandingPage extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener {
 
+    private static final String KEY_SELECTED_FRAGMENT_INDEX = "selected_fragment_index";
+
     private static final int PICS_FRAGMENT = 1;
+    private static final String TAG_PICS = "landing_page.pics";
     private static final int POEMS_FRAGMENT = 2;
+    private static final String TAG_POEMS = "landing_page.poems";
 
     private static final long SWIPE_REFRESH_DELAY_MILLIS = 2500;
 
@@ -51,16 +54,39 @@ public class LandingPage extends AppCompatActivity implements SwipeRefreshLayout
         swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.pics_swipe_layout);
         swipeRefreshLayout.setOnRefreshListener(this);
 
-        picsFragment = PicsFragment.newInstance("Pics", "none");
-        picsFragment.setRetainInstance(true);
+        picsFragment = (PicsFragment) getSupportFragmentManager().findFragmentByTag(TAG_PICS);
+        if (picsFragment == null) {
+            picsFragment = PicsFragment.newInstance("Pics", "none");
+            picsFragment.setRetainInstance(true);
+        }
 
-        poemsFragment = PoemsFragment.newInstance("Daddy Ji", "Vidhi", true);
-        poemsFragment.setRetainInstance(true);
+        poemsFragment = (PoemsFragment) getSupportFragmentManager().findFragmentByTag(TAG_POEMS);
+        if (poemsFragment == null) {
+            poemsFragment = PoemsFragment.newInstance("Daddy Ji", "Vidhi", true);
+            poemsFragment.setRetainInstance(true);
+        }
 
         isAdmin = Store.getInstance(this).isAdmin();
 
-        currentlyVisibleFragment = PICS_FRAGMENT;
-        loadFragment(this.savedInstanceState, picsFragment);
+//        currentlyVisibleFragment = PICS_FRAGMENT;
+//        loadFragment(this.savedInstanceState, picsFragment);
+
+        if (savedInstanceState == null) {
+            currentlyVisibleFragment = PICS_FRAGMENT;
+            loadFragment(picsFragment, TAG_PICS);
+        } else {
+            currentlyVisibleFragment = savedInstanceState.getInt(KEY_SELECTED_FRAGMENT_INDEX);
+            switch (currentlyVisibleFragment) {
+                case PICS_FRAGMENT:
+                    loadFragment(picsFragment, TAG_PICS);
+                    break;
+                case POEMS_FRAGMENT:
+                    loadFragment(poemsFragment, TAG_POEMS);
+                    break;
+                default:
+                    break;
+            }
+        }
 
     }
 
@@ -76,41 +102,30 @@ public class LandingPage extends AppCompatActivity implements SwipeRefreshLayout
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
 
-        if (savedInstanceState == null) {
-            currentlyVisibleFragment = PICS_FRAGMENT;
-            loadFragment(this.savedInstanceState, picsFragment);
-        } else {
-            currentlyVisibleFragment = savedInstanceState.getInt("selectedFragment");
-            switch (currentlyVisibleFragment) {
-                case PICS_FRAGMENT:
-                    loadFragment(this.savedInstanceState, picsFragment);
-                    break;
-                case POEMS_FRAGMENT:
-                    loadFragment(this.savedInstanceState, poemsFragment);
-                    break;
-                default:
-                    break;
-            }
-        }
+//        if (savedInstanceState == null) {
+//            currentlyVisibleFragment = PICS_FRAGMENT;
+//            loadFragment(this.savedInstanceState, picsFragment);
+//        } else {
+//            currentlyVisibleFragment = savedInstanceState.getInt(KEY_SELECTED_FRAGMENT_INDEX);
+//            switch (currentlyVisibleFragment) {
+//                case PICS_FRAGMENT:
+//                    loadFragment(this.savedInstanceState, picsFragment);
+//                    break;
+//                case POEMS_FRAGMENT:
+//                    loadFragment(this.savedInstanceState, poemsFragment);
+//                    break;
+//                default:
+//                    break;
+//            }
+//        }
     }
 
-    private void loadFragment(Bundle savedInstanceState, Fragment fragment) {
+    private void loadFragment(Fragment fragment, String tag) {
         if (findViewById(R.id.fragment_holder) != null) {
-
-            // However, if we're being restored from a previous state,
-            // then we don't need to do anything and should return or else
-            // we could end up with overlapping fragments.
-//            if (savedInstanceState != null) {
-//                return;
-//            }
-
-            // In case this activity was started with special instructions from an
-            // Intent, pass the Intent's extras to the fragment as arguments
-            // fragment.setArguments(getIntent().getExtras());
 
             // replace the 'fragment_container' FrameLayout with the fragment
             getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.fragment_holder, fragment).commit();
+                    .replace(R.id.fragment_holder, fragment, tag).commit();
 
         }
     }
@@ -133,9 +148,9 @@ public class LandingPage extends AppCompatActivity implements SwipeRefreshLayout
     }
 
     @Override
-    public void onSaveInstanceState(Bundle outState, PersistableBundle outPersistentState) {
-        outState.putInt("selectedFragment", currentlyVisibleFragment);
-        super.onSaveInstanceState(outState, outPersistentState);
+    protected void onSaveInstanceState(Bundle outState) {
+        outState.putInt(KEY_SELECTED_FRAGMENT_INDEX, currentlyVisibleFragment);
+        super.onSaveInstanceState(outState);
     }
 
     @Override
@@ -160,7 +175,7 @@ public class LandingPage extends AppCompatActivity implements SwipeRefreshLayout
                 }
 
                 currentlyVisibleFragment = PICS_FRAGMENT;
-                loadFragment(this.savedInstanceState, picsFragment);
+                loadFragment(picsFragment, TAG_PICS);
                 return true;
             case R.id.only_poems:
 
@@ -177,7 +192,7 @@ public class LandingPage extends AppCompatActivity implements SwipeRefreshLayout
                 }
 
                 currentlyVisibleFragment = POEMS_FRAGMENT;
-                loadFragment(savedInstanceState, poemsFragment);
+                loadFragment(poemsFragment, TAG_POEMS);
                 return true;
             case R.id.bug_report_menu:
 
@@ -235,14 +250,14 @@ public class LandingPage extends AppCompatActivity implements SwipeRefreshLayout
     @Override
     public void onBackPressed() {
 
+        // When back pressed, load pics if not visible, or close activity
         if (currentlyVisibleFragment != PICS_FRAGMENT) {
             if (picsFragment == null) {
                 picsFragment = PicsFragment.newInstance("Pics", "none");
                 picsFragment.setRetainInstance(true);
             }
-
             currentlyVisibleFragment = PICS_FRAGMENT;
-            loadFragment(this.savedInstanceState, picsFragment);
+            loadFragment(picsFragment, TAG_PICS);
         } else {
             super.onBackPressed();
         }

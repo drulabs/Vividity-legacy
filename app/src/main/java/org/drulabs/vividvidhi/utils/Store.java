@@ -41,6 +41,21 @@ public class Store {
     private static final String KEY_PIC_NAME = "pic_name";
     private String picName;
 
+    private static final String KEY_FCM_TOKEN = "fcm_token";
+    private String fcmToken;
+
+    private static final String KEY_FIREBASE_UID = "firebase_uid";
+    private String firebaseUID;
+
+    private static final String KEY_FIREBASE_PIC = "firebase_pic_url";
+    private String firebasePicUrl;
+
+    private static final String KEY_USER_EMAIL = "user_email";
+    private String userEmail;
+
+    private static final String KEY_USERINFO_SYNCED = "is_user_info_synced";
+    private boolean isUserInfoSynced;
+
     private Store(Context context) {
         prefs = context.getSharedPreferences(APP_STORE_LOCAL, Context.MODE_PRIVATE);
         prefsEditor = prefs.edit();
@@ -128,6 +143,71 @@ public class Store {
         this.myKey = key;
         prefsEditor.putString(KEY_USERKEY, key);
         prefsEditor.apply();
+    }
+
+    public void setFcmToken(String fcmToken) {
+        this.fcmToken = fcmToken;
+        prefsEditor.putString(KEY_FCM_TOKEN, fcmToken);
+        prefsEditor.apply();
+    }
+
+    public void setFirebaseUID(String firebaseUID) {
+        this.firebaseUID = firebaseUID;
+        prefsEditor.putString(KEY_FIREBASE_UID, firebaseUID);
+        prefsEditor.apply();
+    }
+
+    public void setFirebasePicUrl(String firebasePicUrl) {
+        this.firebasePicUrl = firebasePicUrl;
+        prefsEditor.putString(KEY_FIREBASE_PIC, firebasePicUrl);
+        prefsEditor.apply();
+    }
+
+    public void setUserEmail(String userEmail) {
+        this.userEmail = userEmail;
+        prefsEditor.putString(KEY_USER_EMAIL, userEmail);
+        prefsEditor.apply();
+    }
+
+    public void setIsUserInfoSynced(boolean isSynced) {
+        this.isUserInfoSynced = isSynced;
+        prefsEditor.putBoolean(KEY_USERINFO_SYNCED, isSynced);
+        prefsEditor.apply();
+    }
+
+    public boolean isUserInfoSynced() {
+        if (isUserInfoSynced == false) {
+            isUserInfoSynced = prefs.getBoolean(KEY_USERINFO_SYNCED, false);
+        }
+        return isUserInfoSynced;
+    }
+
+    public String getUserEmail() {
+        if (userEmail == null) {
+            userEmail = prefs.getString(KEY_USER_EMAIL, null);
+        }
+        return userEmail;
+    }
+
+    public String getFirebasePicUrl() {
+        if (firebasePicUrl == null) {
+            firebasePicUrl = prefs.getString(KEY_FIREBASE_PIC, null);
+        }
+        return firebasePicUrl;
+    }
+
+    public String getFirebaseUID() {
+        if (firebaseUID == null) {
+            firebaseUID = prefs.getString(KEY_FIREBASE_UID, null);
+        }
+        return firebaseUID;
+    }
+
+    public String getFcmToken() {
+        if (fcmToken == null) {
+            fcmToken = prefs.getString(KEY_FCM_TOKEN, null);
+        }
+        return fcmToken;
     }
 
     public String getUsername() {

@@ -56,13 +56,30 @@
             android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
             android:theme="@style/Base.Theme.AppCompat"/>
 
+        <activity android:name=".like.LikesActivity">
+        </activity>
+
+        <activity android:name=".signin.SignInActivity"/>
+
+        <!--Services-->
         <service
             android:name=".services.Downloader"
             android:exported="false">
         </service>
-
-        <activity android:name=".like.LikesActivity">
-        </activity>
+        <!-- [START firebase_service] -->
+        <service android:name=".services.FCMessagingService">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+            </intent-filter>
+        </service>
+        <!-- [END firebase_service] -->
+        <!-- [START firebase_iid_service] -->
+        <service android:name=".services.FCMTokenFetcher">
+            <intent-filter>
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT"/>
+            </intent-filter>
+        </service>
+        <!-- [END firebase_iid_service] -->
     </application>
 
 </manifest>

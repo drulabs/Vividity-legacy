@@ -12,6 +12,10 @@ public class User {
     private String picName;
     private String relationShip;
     private boolean admin;
+    private String fcmToken;
+    private String firebaseUID;
+    private String firebasePicUrl;
+    private String userEmail;
 
     public String getName() {
         return name;
@@ -59,5 +63,37 @@ public class User {
 
     public void setAdmin(boolean admin) {
         this.admin = admin;
+    }
+
+    public String getFcmToken() {
+        return fcmToken;
+    }
+
+    public void setFcmToken(String fcmToken) {
+        this.fcmToken = fcmToken;
+    }
+
+    public String getFirebaseUID() {
+        return firebaseUID;
+    }
+
+    public void setFirebaseUID(String firebaseUID) {
+        this.firebaseUID = firebaseUID;
+    }
+
+    public String getUserEmail() {
+        return userEmail;
+    }
+
+    public void setUserEmail(String userEmail) {
+        this.userEmail = userEmail;
+    }
+
+    public String getFirebasePicUrl() {
+        return firebasePicUrl;
+    }
+
+    public void setFirebasePicUrl(String firebasePicUrl) {
+        this.firebasePicUrl = firebasePicUrl;
     }
 }

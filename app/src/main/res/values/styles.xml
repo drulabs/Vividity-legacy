@@ -117,4 +117,12 @@
         <!--<item name="app:elevation">@dimen/elevation_regular</item>-->
     </style>
 
+    <style name="signin_message" parent="fontItalic">
+        <item name="android:textSize">@dimen/txt_big</item>
+        <item name="android:textColor">@color/pure_black</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">@dimen/margin_large</item>
+    </style>
+
 </resources>
