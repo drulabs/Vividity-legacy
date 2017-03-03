@@ -72,14 +72,14 @@ public class LoginHandler {
                 }
 
                 // Username and password verified. Set other user info now
-                if(!store.isUserInfoSynced()){
-                    userDB.child(currentUserKey).setValue(Constants.UB_FCM_TOKEN, store
+                if (!store.isUserInfoSynced()) {
+                    userDB.child(currentUserKey).child(Constants.UB_FCM_TOKEN).setValue(store
                             .getFcmToken());
-                    userDB.child(currentUserKey).setValue(Constants.UB_FIREBASE_PIC, store
+                    userDB.child(currentUserKey).child(Constants.UB_FIREBASE_PIC).setValue(store
                             .getFirebasePicUrl());
-                    userDB.child(currentUserKey).setValue(Constants.UB_FIREBASE_UID, store
+                    userDB.child(currentUserKey).child(Constants.UB_FIREBASE_UID).setValue(store
                             .getFirebaseUID());
-                    userDB.child(currentUserKey).setValue(Constants.UB_USER_EMAIL, store
+                    userDB.child(currentUserKey).child(Constants.UB_USER_EMAIL).setValue(store
                             .getUserEmail());
                     store.setIsUserInfoSynced(true);
                 }

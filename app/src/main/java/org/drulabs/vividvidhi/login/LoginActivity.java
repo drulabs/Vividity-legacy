@@ -1,5 +1,6 @@
 package org.drulabs.vividvidhi.login;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -9,6 +10,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+
+import com.google.firebase.auth.FirebaseAuth;
 
 import org.drulabs.vividvidhi.PresenterCreator;
 import org.drulabs.vividvidhi.R;
@@ -27,6 +30,8 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
     View loginViewHolder;
     EditText etUserName, etPassword;
 
+    private ProgressDialog dialog = null;
+
     //Presenter reference
     LoginContract.Presenter presenter;
 
@@ -35,7 +40,8 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        if (Store.getInstance(this).getUserEmail() == null) {
+        if (Store.getInstance(this).getUserEmail() == null || FirebaseAuth.getInstance()
+                .getCurrentUser() == null) {
             Intent signInIntent = new Intent(this, SignInActivity.class);
             startActivity(signInIntent);
             finish();
@@ -53,6 +59,10 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
             String savedUsername = Store.getInstance(this).getUsername();
             String savedPassword = Store.getInstance(this).getPassword();
 
+            dialog = new ProgressDialog(this);
+            dialog.setMessage(getString(R.string.logging_in));
+            dialog.show();
+
             presenter.handleLogin(savedUsername, savedPassword);
             return;
         }
@@ -65,8 +75,10 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        presenter.cancelLogin();
-        presenter.destroy();
+        if (presenter != null) {
+            presenter.cancelLogin();
+            presenter.destroy();
+        }
     }
 
     @Override
@@ -119,33 +131,51 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
     @Override
     public void showLoading() {
         progressBar.setVisibility(View.VISIBLE);
+        if (dialog != null && dialog.isShowing()) {
+            dialog.dismiss();
+        }
     }
 
     @Override
     public void hideLoading() {
         progressBar.setVisibility(View.GONE);
+        if (dialog != null && dialog.isShowing()) {
+            dialog.dismiss();
+        }
     }
 
     @Override
     public void onUserNameError(String message) {
         //showSnackbar(message);
         etUserName.setError(message);
+        if (dialog != null && dialog.isShowing()) {
+            dialog.dismiss();
+        }
     }
 
     @Override
     public void onPasswordError(String message) {
         //showSnackbar(message);
         etPassword.setError(message);
+        if (dialog != null && dialog.isShowing()) {
+            dialog.dismiss();
+        }
     }
 
     @Override
     public void onLoginFailure() {
         showSnackbar(getString(R.string.invalid_credentials_msg));
+        if (dialog != null && dialog.isShowing()) {
+            dialog.dismiss();
+        }
     }
 
     @Override
     public void onLoginSuccess() {
         showSnackbar(getString(R.string.txt_login_successful));
+        if (dialog != null && dialog.isShowing()) {
+            dialog.dismiss();
+        }
         presenter.navigateToHome();
     }
 

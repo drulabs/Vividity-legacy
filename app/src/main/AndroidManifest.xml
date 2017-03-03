@@ -44,7 +44,9 @@
                 android:resource="@xml/provider_paths"/>
         </provider>
 
-        <activity android:name=".landing.LandingPage">
+        <activity
+            android:name=".landing.LandingPage"
+            android:screenOrientation="portrait">
         </activity>
         <activity
             android:name=".add.AddPicture"

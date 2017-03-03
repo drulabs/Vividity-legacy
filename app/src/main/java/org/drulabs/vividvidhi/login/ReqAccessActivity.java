@@ -63,6 +63,11 @@ public class ReqAccessActivity extends AppCompatActivity implements ReqAccessCon
         dialog = new ProgressDialog(ReqAccessActivity.this);
         dialog.setMessage(getString(R.string.loading_please_wait));
         dialog.setCanceledOnTouchOutside(false);
+
+        String savedName = Store.getInstance(this).getMyName();
+        if (savedName != null) {
+            etName.setText(savedName);
+        }
     }
 
     @Override
@@ -113,10 +118,12 @@ public class ReqAccessActivity extends AppCompatActivity implements ReqAccessCon
                 break;
         }
     }
+
     @Override
     public void onNoProfilePicError() {
         showSnackBar(getString(R.string.no_profile_pic));
     }
+
     @Override
     public void onEmptyUserNameError() {
         showSnackBar(getString(R.string.empty_username_msg));

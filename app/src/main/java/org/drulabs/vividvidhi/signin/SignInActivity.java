@@ -48,7 +48,7 @@ public class SignInActivity extends AppCompatActivity implements GoogleApiClient
 
     // Firebase instance variables
     private FirebaseAuth mFirebaseAuth;
-    private DatabaseReference mFirebaseDBReference;
+    private FirebaseAuth.AuthStateListener mAuthListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,15 +73,44 @@ public class SignInActivity extends AppCompatActivity implements GoogleApiClient
                 .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
                 .build();
 
-        // Initialize FirebaseAuth
-        mFirebaseAuth = FirebaseAuth.getInstance();
-        mFirebaseDBReference = FirebaseDatabase.getInstance().getReference().child(Constants
-                .USER_BASE);
+        // Initialize FirebaseAuth.
+        if (mFirebaseAuth == null) {
+            mFirebaseAuth = FirebaseAuth.getInstance();
+        }
+
+        mAuthListener = new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                FirebaseUser user = firebaseAuth.getCurrentUser();
+                if (user != null) {
+                    // User is signed in
+                    Log.d(TAG, "onAuthStateChanged:signed_in:" + user.getUid());
+                } else {
+                    // User is signed out
+                    Log.d(TAG, "onAuthStateChanged:signed_out");
+                }
+                // ...
+            }
+        };
 
         // Others
         store = Store.getInstance(SignInActivity.this);
         dialog = new ProgressDialog(this);
         dialog.setMessage(getString(R.string.loading_please_wait));
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        mFirebaseAuth.addAuthStateListener(mAuthListener);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        if (mAuthListener != null) {
+            mFirebaseAuth.removeAuthStateListener(mAuthListener);
+        }
     }
 
     @Override
@@ -120,6 +149,7 @@ public class SignInActivity extends AppCompatActivity implements GoogleApiClient
     private void firebaseAuthWithGoogle(final GoogleSignInAccount acct) {
         Log.d(TAG, "firebaseAuthWithGooogle:" + acct.getId());
         AuthCredential credential = GoogleAuthProvider.getCredential(acct.getIdToken(), null);
+
         mFirebaseAuth.signInWithCredential(credential)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
@@ -165,7 +195,7 @@ public class SignInActivity extends AppCompatActivity implements GoogleApiClient
         store.setFirebaseUID(userUID);
         store.setUserEmail(userEmail);
         store.setMyName(userName);
-        store.setPicUrl(picURL);
+        store.setFirebasePicUrl(picURL);
     }
 
     @Override

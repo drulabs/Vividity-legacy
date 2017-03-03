@@ -22,6 +22,7 @@ import org.drulabs.vividvidhi.utils.Utility;
 public class LandingPage extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener {
 
     private static final String KEY_SELECTED_FRAGMENT_INDEX = "selected_fragment_index";
+    private static final String KEY_POEMS_FRAG_LOADED = "isPoemsFragmentLoaded";
 
     private static final int PICS_FRAGMENT = 1;
     private static final String TAG_PICS = "landing_page.pics";
@@ -34,7 +35,8 @@ public class LandingPage extends AppCompatActivity implements SwipeRefreshLayout
     // Is the current user admin ???
     private boolean isAdmin = false;
 
-    private int currentlyVisibleFragment;
+    private int currentlyVisibleFragment = PICS_FRAGMENT;
+    private boolean isPoemsFragmentLoaded = false;
 
     private SwipeRefreshLayout swipeRefreshLayout;
 
@@ -51,17 +53,20 @@ public class LandingPage extends AppCompatActivity implements SwipeRefreshLayout
 
         this.savedInstanceState = savedInstanceState;
 
+//        isPoemsFragmentLoaded = savedInstanceState==null?false:savedInstanceState.getBoolean
+//                (KEY_POEMS_FRAG_LOADED);
+
         swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.pics_swipe_layout);
         swipeRefreshLayout.setOnRefreshListener(this);
 
         picsFragment = (PicsFragment) getSupportFragmentManager().findFragmentByTag(TAG_PICS);
-        if (picsFragment == null) {
+        if (picsFragment == null && currentlyVisibleFragment == PICS_FRAGMENT) {
             picsFragment = PicsFragment.newInstance("Pics", "none");
             picsFragment.setRetainInstance(true);
         }
 
         poemsFragment = (PoemsFragment) getSupportFragmentManager().findFragmentByTag(TAG_POEMS);
-        if (poemsFragment == null) {
+        if (poemsFragment == null && currentlyVisibleFragment == POEMS_FRAGMENT) {
             poemsFragment = PoemsFragment.newInstance("Daddy Ji", "Vidhi", true);
             poemsFragment.setRetainInstance(true);
         }
@@ -93,9 +98,19 @@ public class LandingPage extends AppCompatActivity implements SwipeRefreshLayout
     @Override
     protected void onResume() {
         super.onResume();
-//        if (!fragment.isDetached()) {
-//            fragment.reset();
-//        }
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if (isFinishing()) {
+            if (picsFragment != null) {
+                removeFragment(picsFragment);
+            }
+            if (poemsFragment != null) {
+                removeFragment(poemsFragment);
+            }
+        }
     }
 
     @Override
@@ -150,6 +165,7 @@ public class LandingPage extends AppCompatActivity implements SwipeRefreshLayout
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         outState.putInt(KEY_SELECTED_FRAGMENT_INDEX, currentlyVisibleFragment);
+        outState.putBoolean(KEY_POEMS_FRAG_LOADED, isPoemsFragmentLoaded);
         super.onSaveInstanceState(outState);
     }
 
@@ -178,6 +194,8 @@ public class LandingPage extends AppCompatActivity implements SwipeRefreshLayout
                 loadFragment(picsFragment, TAG_PICS);
                 return true;
             case R.id.only_poems:
+
+                isPoemsFragmentLoaded = true;
 
                 if (currentlyVisibleFragment == POEMS_FRAGMENT) {
                     if (poemsFragment != null) {

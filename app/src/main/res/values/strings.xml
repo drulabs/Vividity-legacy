@@ -79,4 +79,5 @@
     <string name="created_on_text">Created on</string>
     <string name="no_more_poems_available">No more poems are available at this moment.</string>
     <string name="sign_in_text">Sign in using any of the following service</string>
+    <string name="logging_in">Logging in...</string>
 </resources>
