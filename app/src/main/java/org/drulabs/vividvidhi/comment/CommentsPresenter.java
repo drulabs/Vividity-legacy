@@ -85,6 +85,13 @@ public class CommentsPresenter implements CommentContract.Presenter, CommentsHan
     }
 
     @Override
+    public void onNoCommentsFound() {
+        if (view != null) {
+            view.hideLoading();
+        }
+    }
+
+    @Override
     public void onError() {
         if (view != null) {
             view.onLoadError(activity.getString(R.string.something_went_wrong));

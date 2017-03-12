@@ -75,6 +75,10 @@ public class Store {
         return instance;
     }
 
+    public void clearData() {
+        prefsEditor.clear().apply();
+    }
+
     public void saveCurrentUser(String currentUserKey, User currentUser) {
         this.currentUser = currentUser;
 

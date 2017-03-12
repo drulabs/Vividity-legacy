@@ -57,7 +57,7 @@
     <string name="fill_all_columns">Please fill all the fields</string>
     <string name="pic_already_exists">This pic already exists</string>
     <string name="save_picture">Save</string>
-    <string name="image_upload_successful">Image has be uploaded successfully</string>
+    <string name="image_upload_successful">Image has been uploaded successfully</string>
     <string name="error_uploading_pic">Error occured while uploading the picture. Try again later...</string>
     <string name="invalid_args_msg">Invalid arguments pased</string>
     <string name="error_try_again">An error has occured. Please try again later</string>
@@ -80,4 +80,5 @@
     <string name="no_more_poems_available">No more poems are available at this moment.</string>
     <string name="sign_in_text">Sign in using any of the following service</string>
     <string name="logging_in">Logging in...</string>
+    <string name="account_suspended_msg">Your account has been suspended by administrator. Please request access from login page.</string>
 </resources>

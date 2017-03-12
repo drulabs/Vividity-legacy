@@ -127,6 +127,8 @@ public class CommentsHandler {
             if (dataSnapshot != null && dataSnapshot.hasChildren()) {
                 Comment singleComment = dataSnapshot.getValue(Comment.class);
                 callback.onCommentFetched(singleComment);
+            } else {
+                callback.onError();
             }
         }
 
@@ -158,6 +160,8 @@ public class CommentsHandler {
         void onCommentFetched(Comment comment);
 
         void onCommentAddedSuccessfully();
+
+        void onNoCommentsFound();
 
         void onError();
     }

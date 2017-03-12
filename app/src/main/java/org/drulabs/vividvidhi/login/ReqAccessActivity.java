@@ -30,7 +30,7 @@ public class ReqAccessActivity extends AppCompatActivity implements ReqAccessCon
 
     ProgressDialog dialog;
 
-    // Request access presenter
+    // Request access mPresenter
     ReqAccessContract.Presenter presenter;
 
     @Override

@@ -47,7 +47,9 @@ public class PicsPresenter implements PicsContract.Presenter, PicsHandler.Callba
     public void loadNextBatch() {
         if (picsHandler.hasMorePics()) {
             picsHandler.fetchPics();
-            view.showLoading();
+            if (view != null) {
+                view.showLoading();
+            }
         }
     }
 
@@ -64,8 +66,10 @@ public class PicsPresenter implements PicsContract.Presenter, PicsHandler.Callba
 
     @Override
     public void onPhotosFetched(HashMap<String, Picture> photos) {
-        view.loadPics(photos);
-        view.hideLoading();
+        if (view != null) {
+            view.loadPics(photos);
+            view.hideLoading();
+        }
     }
 
     @Override
@@ -75,8 +79,10 @@ public class PicsPresenter implements PicsContract.Presenter, PicsHandler.Callba
 
     @Override
     public void onError(String message) {
-        view.hideLoading();
-        view.onLoadError(message);
+        if (view != null) {
+            view.hideLoading();
+            view.onLoadError(message);
+        }
     }
 
     @Override

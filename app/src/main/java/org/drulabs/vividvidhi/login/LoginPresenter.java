@@ -87,11 +87,11 @@ public class LoginPresenter implements LoginContract.Presenter, LoginHandler.Log
 
     @Override
     public void navigateToHome() {
-
         Intent homeIntent = new Intent(activity, LandingPage.class);
         activity.startActivity(homeIntent);
-        view.destroyWithMessage(null);
-
+        if (view != null) {
+            view.destroyWithMessage(null);
+        }
     }
 
     @Override
@@ -150,31 +150,39 @@ public class LoginPresenter implements LoginContract.Presenter, LoginHandler.Log
 
     @Override
     public void onInvalidUsername() {
-        view.hideLoading();
-        view.clearUsername();
+        if (view != null) {
+            view.hideLoading();
+            view.clearUsername();
+            view.onUserNameError(activity.getString(R.string.error_invalid_username));
+        }
         isLoggingIn = false;
-        view.onUserNameError(activity.getString(R.string.error_invalid_username));
     }
 
     @Override
     public void onInvalidPassword() {
-        view.hideLoading();
-        view.clearPassword();
-        view.onPasswordError(activity.getString(R.string.error_invalid_password));
+        if (view != null) {
+            view.hideLoading();
+            view.clearPassword();
+            view.onPasswordError(activity.getString(R.string.error_invalid_password));
+        }
         isLoggingIn = false;
     }
 
     @Override
     public void onDatabaseError() {
-        view.onLoginFailure();
-        isLoggingIn = false;
-        view.hideLoading();
+        if (view != null) {
+            view.onLoginFailure();
+            isLoggingIn = false;
+            view.hideLoading();
+        }
     }
 
     @Override
     public void onSuccess(String username, String password) {
-        view.onLoginSuccess();
-        view.hideLoading();
-        isLoggingIn = false;
+        if (view != null) {
+            view.onLoginSuccess();
+            view.hideLoading();
+            isLoggingIn = false;
+        }
     }
 }

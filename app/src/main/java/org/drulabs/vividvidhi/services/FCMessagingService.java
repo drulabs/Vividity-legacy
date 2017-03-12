@@ -4,9 +4,12 @@ import android.os.Bundle;
 import android.util.Log;
 
 import com.google.firebase.analytics.FirebaseAnalytics;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 
+import org.drulabs.vividvidhi.R;
+import org.drulabs.vividvidhi.ui.NotificationToast;
 import org.drulabs.vividvidhi.utils.Store;
 
 import java.util.Map;
@@ -18,6 +21,8 @@ import java.util.Map;
 public class FCMessagingService extends FirebaseMessagingService {
 
     private static final String TAG = "FCMessagingService";
+
+    private static final String KEY_SUSPEND_ACCOUNT = "suspend_account";
 
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
@@ -36,7 +41,7 @@ public class FCMessagingService extends FirebaseMessagingService {
             bundle.putString("FCM_data", receivedMap.toString());
 
             firebaseAnalytics.logEvent(store.getUserEmail(), bundle);
-            //handleFCM(receivedMap);
+            handleFCM(receivedMap);
 
         }
 
@@ -50,6 +55,19 @@ public class FCMessagingService extends FirebaseMessagingService {
             firebaseAnalytics.logEvent(store.getUserEmail(), bundle);
 
             //FirebaseAnalytics.getInstance(getApplicationContext()).logEvent("");
+        }
+    }
+
+    private void handleFCM(Map<String, String> receivedMap) {
+        if (receivedMap != null && receivedMap.containsKey(KEY_SUSPEND_ACCOUNT)) {
+            boolean suspendAccount = Boolean.parseBoolean(receivedMap.get
+                    (KEY_SUSPEND_ACCOUNT));
+            if (suspendAccount) {
+                Store.getInstance(getApplicationContext()).clearData();
+                FirebaseAuth.getInstance().signOut();
+                NotificationToast.showToast(getApplicationContext(), getString(R.string
+                        .account_suspended_msg));
+            }
         }
     }
 

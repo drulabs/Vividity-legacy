@@ -33,7 +33,7 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
     private ProgressDialog dialog = null;
 
     //Presenter reference
-    LoginContract.Presenter presenter;
+    LoginContract.Presenter mPresenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,34 +56,35 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
         if (Store.getInstance(this).getMyName() != null && Store.getInstance(this).getPassword()
                 != null) {
 
-            String savedUsername = Store.getInstance(this).getUsername();
-            String savedPassword = Store.getInstance(this).getPassword();
-
-            dialog = new ProgressDialog(this);
-            dialog.setMessage(getString(R.string.logging_in));
-            dialog.show();
-
-            presenter.handleLogin(savedUsername, savedPassword);
+//            String savedUsername = Store.getInstance(this).getUsername();
+//            String savedPassword = Store.getInstance(this).getPassword();
+//
+//            dialog = new ProgressDialog(this);
+//            dialog.setMessage(getString(R.string.logging_in));
+//            dialog.show();
+//
+//            mPresenter.handleLogin(savedUsername, savedPassword);
+            mPresenter.navigateToHome();
             return;
         }
 
-        presenter.start();
-        presenter.fetchWelcomeImageIn(imgLogin);
-        presenter.requestSDCardPermission();
+        mPresenter.start();
+        mPresenter.fetchWelcomeImageIn(imgLogin);
+        mPresenter.requestSDCardPermission();
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if (presenter != null) {
-            presenter.cancelLogin();
-            presenter.destroy();
+        if (mPresenter != null) {
+            mPresenter.cancelLogin();
+            mPresenter.destroy();
         }
     }
 
     @Override
     public void setPresenter(LoginContract.Presenter presenter) {
-        this.presenter = presenter;
+        this.mPresenter = presenter;
     }
 
     private void initializeUIElements() {
@@ -104,11 +105,11 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
             case R.id.email_sign_in_button:
                 String username = etUserName.getText().toString();
                 String pwd = etPassword.getText().toString();
-                presenter.handleLogin(username, pwd);
+                mPresenter.handleLogin(username, pwd);
                 break;
             case R.id.request_access:
 //                Builder.getInstance().setButton(signInButton);
-                presenter.handleRequestAccess();
+                mPresenter.handleRequestAccess();
                 break;
         }
     }
@@ -117,7 +118,7 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
                                            @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        presenter.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        mPresenter.onRequestPermissionsResult(requestCode, permissions, grantResults);
     }
 
     @Override
@@ -176,7 +177,7 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
         if (dialog != null && dialog.isShowing()) {
             dialog.dismiss();
         }
-        presenter.navigateToHome();
+        mPresenter.navigateToHome();
     }
 
     @Override
