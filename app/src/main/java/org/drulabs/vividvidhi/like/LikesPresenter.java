@@ -2,6 +2,7 @@ package org.drulabs.vividvidhi.like;
 
 import android.content.Context;
 
+import org.drulabs.vividvidhi.R;
 import org.drulabs.vividvidhi.dto.Like;
 import org.drulabs.vividvidhi.firebase.LikesHandler;
 
@@ -49,6 +50,14 @@ public class LikesPresenter implements LikesContract.Presenter, LikesHandler.Cal
     @Override
     public void onLikeUpdated(boolean isLiked, boolean isSuccess) {
 
+    }
+
+    @Override
+    public void onNoMoreLikes() {
+        if (view != null) {
+            view.onNoMoreLikes();
+            view.hideLoading();
+        }
     }
 
     @Override

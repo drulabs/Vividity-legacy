@@ -111,6 +111,11 @@ public class LikesActivity extends AppCompatActivity implements LikesContract.Vi
         }
     }
 
+    @Override
+    public void onNoMoreLikes() {
+        NotificationToast.showToast(this, getString(R.string.no_likes_found));
+    }
+
     void setToolBarTitle(String title) {
         if (getSupportActionBar() != null) {
             getSupportActionBar().setTitle(title);

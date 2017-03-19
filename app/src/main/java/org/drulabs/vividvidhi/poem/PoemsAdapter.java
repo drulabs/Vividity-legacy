@@ -35,7 +35,7 @@ public class PoemsAdapter extends RecyclerView.Adapter<PoemsAdapter.PoemsVH> {
     private Context mContext;
 
     private static final SimpleDateFormat dateFormat = new SimpleDateFormat("MMM-dd, yyyy " +
-            "(HH:mm:ss)");
+            "(HH:mm)");
 
     private DBHandler dbHandler;
 
@@ -206,7 +206,10 @@ public class PoemsAdapter extends RecyclerView.Adapter<PoemsAdapter.PoemsVH> {
         List<Poem> localPoems = new ArrayList<>();
 
         for (Map.Entry<String, Poem> map : poemMap.entrySet()) {
-            localPoems.add(map.getValue());
+            Poem singlePoem = map.getValue();
+            if (!poems.contains(singlePoem) && !localPoems.contains(singlePoem)) {
+                localPoems.add(map.getValue());
+            }
         }
 
         Collections.sort(localPoems);

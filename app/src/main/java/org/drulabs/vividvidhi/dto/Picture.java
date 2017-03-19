@@ -89,7 +89,8 @@ public class Picture implements Comparable<Picture> {
         if (dateTaken != picture.dateTaken) return false;
         if (!picName.equals(picture.picName)) return false;
         if (!photoCredit.equals(picture.photoCredit)) return false;
-        return relationshipWithPhotographer != null ? relationshipWithPhotographer.equals(picture.relationshipWithPhotographer) : picture.relationshipWithPhotographer == null;
+        return relationshipWithPhotographer != null ? relationshipWithPhotographer.equals(picture
+                .relationshipWithPhotographer) : picture.relationshipWithPhotographer == null;
 
     }
 
@@ -98,7 +99,8 @@ public class Picture implements Comparable<Picture> {
         int result = picName.hashCode();
         result = 31 * result + (int) (dateTaken ^ (dateTaken >>> 32));
         result = 31 * result + photoCredit.hashCode();
-        result = 31 * result + (relationshipWithPhotographer != null ? relationshipWithPhotographer.hashCode() : 0);
+        result = 31 * result + (relationshipWithPhotographer != null ?
+                relationshipWithPhotographer.hashCode() : 0);
         return result;
     }
 

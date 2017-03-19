@@ -20,8 +20,6 @@ import org.drulabs.vividvidhi.utils.Compression;
 import org.drulabs.vividvidhi.utils.Store;
 import org.drulabs.vividvidhi.utils.Utility;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 
 import static android.app.Activity.RESULT_OK;
@@ -96,10 +94,12 @@ public class AddPicPresenter implements AddPicContract.Presenter, AddPicHandler.
                         String selectedFilePath = Compression.getRealPathFromURI(activity, picUri);
                         //Utility.getFilePathFromURI(activity, picUri);
 
-                        if (selectedFilePath != null && !selectedFilePath.isEmpty()) {
-                            File selectedFile = new File(selectedFilePath);
-                            lastModified = selectedFile.lastModified();
-                        }
+                        // Commenting this section out to set last modified as the upload date
+                        // instead of actual last modified
+//                        if (selectedFilePath != null && !selectedFilePath.isEmpty()) {
+//                            File selectedFile = new File(selectedFilePath);
+//                            lastModified = selectedFile.lastModified();
+//                        }
 
                         // Using crop image library
                         CropImage.activity(picUri)
