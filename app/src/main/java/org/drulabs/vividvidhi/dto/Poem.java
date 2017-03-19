@@ -81,7 +81,6 @@ public class Poem implements Comparable<Poem> {
         if (!name.equals(poem.name)) return false;
         if (imageName != null ? !imageName.equals(poem.imageName) : poem.imageName != null)
             return false;
-        if (!text.equals(poem.text)) return false;
         return writtenBy.equals(poem.writtenBy);
 
     }

@@ -61,6 +61,8 @@ public class LikesHandler {
                     if (dataSnapshot != null && dataSnapshot.hasChildren()) {
                         Like singleLike = dataSnapshot.getValue(Like.class);
                         mListener.onLikeFetched(singleLike);
+                    } else {
+                        mListener.onNoMoreLikes();
                     }
                 }
 
@@ -171,6 +173,8 @@ public class LikesHandler {
         void onLikeUpdated(boolean isLiked, boolean isSuccess);
 
         void onLikeFetched(Like like);
+
+        void onNoMoreLikes();
         //TODO implement pagination for likes
     }
 

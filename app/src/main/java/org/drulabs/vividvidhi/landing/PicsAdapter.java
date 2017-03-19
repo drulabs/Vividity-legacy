@@ -36,7 +36,7 @@ public class PicsAdapter extends RecyclerView.Adapter<PicsAdapter.PicsVH> {
     private DBHandler dbHandler;
 
     private static final SimpleDateFormat dateFormat = new SimpleDateFormat("MMM-dd, yyyy " +
-            "(HH:mm:ss)");
+            "(HH:mm)");
 
     public PicsAdapter(Context context, PicsContract.Presenter picsPresenter) {
         photos = new ArrayList<>();
@@ -187,7 +187,10 @@ public class PicsAdapter extends RecyclerView.Adapter<PicsAdapter.PicsVH> {
         List<Picture> localPics = new ArrayList<>();
 
         for (Map.Entry<String, Picture> map : picMap.entrySet()) {
-            localPics.add(map.getValue());
+            Picture singlePic = map.getValue();
+            if (!photos.contains(singlePic) && !localPics.contains(singlePic)) {
+                localPics.add(singlePic);
+            }
         }
 
         Collections.sort(localPics);

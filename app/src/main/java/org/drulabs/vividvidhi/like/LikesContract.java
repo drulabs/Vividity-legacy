@@ -16,6 +16,7 @@ public interface LikesContract {
         void showLoading();
         void hideLoading();
         void onLikeFetched(Like like);
+        void onNoMoreLikes();
     }
 
     interface Presenter extends BasePresenter {

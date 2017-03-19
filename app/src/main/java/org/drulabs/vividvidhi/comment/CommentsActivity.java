@@ -137,7 +137,7 @@ public class CommentsActivity extends AppCompatActivity implements CommentContra
 
     @Override
     public void onLoadError(String message) {
-        NotificationToast.showToast(this, getString(R.string.error_try_again));
+        NotificationToast.showToast(this, getString(R.string.no_comments_found));
         if (commentBase != null) {
             commentBase.setVisibility(View.VISIBLE);
         }

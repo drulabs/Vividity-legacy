@@ -2,6 +2,7 @@ package org.drulabs.vividvidhi.firebase;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 
 import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.firebase.database.DataSnapshot;
@@ -117,7 +118,7 @@ public class PoemsHandler {
         }
     };
 
-    public void updateLikesCount(final String key, final boolean isLiked) {
+    public void updateLikesCount(@NonNull final String key, final boolean isLiked) {
 
         // Update likes count
         poemsDB.child(key).addListenerForSingleValueEvent(new ValueEventListener() {

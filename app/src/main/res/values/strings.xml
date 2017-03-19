@@ -44,7 +44,7 @@
     <string name="start_typing_here">Start typing...</string>
     <string name="very_long_text">so cute and so so so pretty, just like an angel from the heavens above. Up above the world so high like a diamond in the sky. Twinkle twinkle little star how I wonder what you are?</string>
     <string name="very_standard_text">She is so cute and perfect. I feel like hugging her all the time.</string>
-    <string name="no_comments_found">No comments found...</string>
+    <string name="no_comments_found">No more comments found...</string>
     <string name="text_share_now">share</string>
 
     <!-- TODO: Remove or change this placeholder text -->
@@ -81,4 +81,5 @@
     <string name="sign_in_text">Sign in using any of the following service</string>
     <string name="logging_in">Logging in...</string>
     <string name="account_suspended_msg">Your account has been suspended by administrator. Please request access from login page.</string>
+    <string name="no_likes_found">No more likes for this artifact</string>
 </resources>
